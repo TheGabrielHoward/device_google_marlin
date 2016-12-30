@@ -5,3 +5,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Tethering
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tethering.noprovisioning=true
+
+# Update engine
+PRODUCT_PACKAGES += brillo_update_payload
