@@ -139,9 +139,6 @@ TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub libbootloader_message libfstab
 
 TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 
-# Install odex files into the other system image
-BOARD_USES_SYSTEM_OTHER_ODEX := true
-
 DEVICE_MANIFEST_FILE := device/google/marlin/manifest.xml
 DEVICE_MATRIX_FILE   := device/google/marlin/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/google/marlin/device_framework_matrix.xml
