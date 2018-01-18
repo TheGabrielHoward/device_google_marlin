@@ -766,7 +766,10 @@ PRODUCT_LOADED_BY_PRIVILEGED_MODULES += \
 # IMS
 PRODUCT_PACKAGES += \
     imssettings \
-    ims-ext-common
+    ims-ext-common \
+    com.android.ims.rcsmanager \
+    RcsService \
+    PresencePolling
 
 # Data services
 PRODUCT_PACKAGES += \
