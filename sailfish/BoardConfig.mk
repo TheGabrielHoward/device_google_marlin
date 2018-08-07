@@ -3,6 +3,9 @@
 # Product-specific compile-time definitions
 #
 
+# Include Bootleggers BoardConfig
+include device/google/marlin/BoardConfigBootleg.mk
+
 TARGET_BOARD_PLATFORM := msm8996
 TARGET_BOOTLOADER_BOARD_NAME := sailfish
 TARGET_BOARD_INFO_FILE := device/google/marlin/sailfish/board-info.txt
@@ -118,7 +121,6 @@ endif
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
@@ -154,9 +156,6 @@ CAMERA_DAEMON_NOT_PRESENT := true
 
 #TARGET_LDPRELOAD := libNimsWrap.so
 
-# TARGET_COMPILE_WITH_MSM_KERNEL := true
-
-TARGET_KERNEL_APPEND_DTB := true
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
 
