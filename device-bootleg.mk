@@ -19,3 +19,6 @@ PRODUCT_PACKAGES += brillo_update_payload
 # nexus.xml
 PRODUCT_COPY_FILES += \
     device/google/marlin/nexus.xml:system/etc/sysconfig/nexus.xml
+
+# Google Assistant
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.opa.eligible_device=true
