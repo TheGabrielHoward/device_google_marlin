@@ -22,3 +22,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="marlin-user 9 PPR2.181005.003.A1 5108978 release-keys"
 
 BUILD_FINGERPRINT := google/marlin/marlin:9/PPR2.181005.003.A1/5108978:user/release-keys
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bootleggers.maintainer=stebomurkn420
