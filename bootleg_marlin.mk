@@ -10,8 +10,6 @@ $(call inherit-product, device/google/marlin/aosp_marlin.mk)
 
 include device/google/marlin/device-bootleg.mk
 
-BOOTLEGGERS_BUILD_TYPE="Shishufied"
-
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := bootleg_marlin
 PRODUCT_BRAND := google
