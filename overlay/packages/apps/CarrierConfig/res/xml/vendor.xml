@@ -34,6 +34,10 @@
     <carrier_config mcc="230" mnc="01">
         <boolean name="carrier_volte_available_bool" value="false" />
     </carrier_config>
+    <carrier_config mcc="234" mnc="15">
+        <boolean name="carrier_volte_available_bool" value="true" />
+        <boolean name="carrier_wfc_ims_available_bool" value="true" />
+    </carrier_config>
     <carrier_config mcc="234" mnc="20">
         <boolean name="prefer_2g_bool" value="false" />
     </carrier_config>
