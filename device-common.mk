@@ -129,6 +129,10 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
+# Trust HAL
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
+
 # Power HAL
 PRODUCT_PACKAGES += \
     android.hardware.power@1.3-service.pixel-libperfmgr
