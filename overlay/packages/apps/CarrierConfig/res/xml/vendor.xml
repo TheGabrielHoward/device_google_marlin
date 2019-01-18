@@ -98,6 +98,7 @@
     <carrier_config mcc="302" mnc="370" gid1="DD">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_wfc_ims_available_bool" value="true" />
+        <boolean name="carrier_vt_available_bool" value="true" />
     </carrier_config>
     <carrier_config mcc="302" mnc="720">
         <boolean name="carrier_volte_available_bool" value="true" />
