@@ -539,6 +539,9 @@ on boot
     chown system system /d/fg_memif/count
     chown system system /d/fg_memif/address
 
+    # Vibration
+    write /sys/class/timed_output/vibrator/vib_strength 30
+
 on property:wc_transport.start_hci=true
     start vendor.start_hci_filter
 
