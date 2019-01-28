@@ -164,7 +164,12 @@ PRODUCT_PACKAGES += \
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl:32 \
-    android.hardware.drm@1.0-service
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1-service.clearkey
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true \
+    media.mediadrmservice.enable=true
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -306,6 +311,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     nanotool \
     sensortest
+
+PRODUCT_PACKAGES += \
+    libsensorndkbridge
 
 PRODUCT_COPY_FILES += \
     device/google/marlin/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
@@ -760,6 +768,9 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVdec \
     libOmxVenc
+
+PRODUCT_PACKAGES += \
+    libtinyxml
 
 include device/google/marlin/utils.mk
 
