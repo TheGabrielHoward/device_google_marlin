@@ -10,3 +10,6 @@ TARGET_KERNEL_CLANG_VERSION := 6.0.2
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
+
+# Shishufied builds
+BOOTLEGGERS_BUILD_TYPE := Shishufied

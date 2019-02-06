@@ -22,6 +22,9 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="sailfish-user 9 PQ1A.190105.004 5148680 release-keys"
 
 BUILD_FINGERPRINT := google/sailfish/sailfish:9/PQ1A.190105.004/5148680:user/release-keys
+    PRIVATE_BUILD_DESC="sailfish-user 9 PQ2A.190205.003 5180536 release-keys"
+
+BUILD_FINGERPRINT := google/sailfish/sailfish:9/PQ2A.190205.003/5180536:user/release-keys
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bootleggers.maintainer=shagbag913
