@@ -3,8 +3,8 @@
 # Product-specific compile-time definitions
 #
 
-# Include Bootleggers BoardConfig
-include device/google/marlin/BoardConfigBootleg.mk
+# Include Liquid BoardConfig
+include device/google/marlin/BoardConfigLiquid.mk
 
 TARGET_BOARD_PLATFORM := msm8996
 TARGET_BOOTLOADER_BOARD_NAME := marlin

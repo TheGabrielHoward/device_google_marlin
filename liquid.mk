@@ -3,15 +3,17 @@ TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
 # Inherit Bootleggers product configuration
-$(call inherit-product, vendor/bootleggers/config/common_full_phone.mk)
+$(call inherit-product, vendor/liquid/config/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/google/marlin/aosp_marlin.mk)
 
-include device/google/marlin/device-bootleg.mk
+include device/google/marlin/device-liquid.mk
+
+export LIQUID_BUILDTYPE=RELEASE
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := bootleg_marlin
+PRODUCT_NAME := liquid_marlin
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Pixel XL
 TARGET_MANUFACTURER := HTC
@@ -25,6 +27,3 @@ BUILD_FINGERPRINT := google/marlin/marlin:9/PQ1A.190105.004/5148680:user/release
     PRIVATE_BUILD_DESC="marlin-user 9 PQ2A.190205.003 5180536 release-keys"
 
 BUILD_FINGERPRINT := google/marlin/marlin:9/PQ2A.190205.003/5180536:user/release-keys
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bootleggers.maintainer=stebomurkn420
