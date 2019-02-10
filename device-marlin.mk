@@ -24,6 +24,10 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
 -include device/google/marlin/device-common.mk
 
+#Permissons
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=log
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/marlin/marlin/overlay
 
