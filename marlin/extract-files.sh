@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017-2019 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,11 +51,11 @@ fi
 # Initialize the helper
 setup_vendor "$DEVICE" "$VENDOR" "$GAHS_ROOT"
 
-extract "$MY_DIR"/device-proprietary-files.txt "$SRC"
-extract "$MY_DIR"/device-proprietary-files-vendor.txt "$SRC"
+extract "$MY_DIR/$DEVICE"/device-proprietary-files.txt "$SRC"
+extract "$MY_DIR/$DEVICE"/device-proprietary-files-vendor.txt "$SRC"
 
 # Don't disable MyVerizonServices app
 sed -i 's|<disabled-until-used-preinstalled-carrier-app package="com.verizon.mips.services" />|<!--disabled-until-used-preinstalled-carrier-app package="com.verizon.mips.services" /-->|g'\
     "$GAHS_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/etc/sysconfig/nexus.xml
 
-"$MY_DIR"/setup-makefiles.sh
+"$MY_DIR/$DEVICE"/setup-makefiles.sh
