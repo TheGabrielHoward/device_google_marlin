@@ -772,6 +772,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libtinyxml
 
+# VR Services
+PRODUCT_PACKAGES += \
+    bufferhubd \
+    performanced \
+    virtual_touchpad \
+    vr_hwc
+
 include device/google/marlin/utils.mk
 
 $(call add-product-sanitizer-module-config,wpa_supplicant,never)
