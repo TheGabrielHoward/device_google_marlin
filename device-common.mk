@@ -658,9 +658,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service.marlin
 
-# Default atrace HAL
+# Pixel atrace HAL
 PRODUCT_PACKAGES += \
-    android.hardware.atrace@1.0-service
+    android.hardware.atrace@1.0-service.pixel
 
 # a_sns_test for sensor testing
 PRODUCT_PACKAGES_DEBUG += \
