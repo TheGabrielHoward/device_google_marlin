@@ -13,36 +13,39 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 set -e
 
 VENDOR=google
-DEVICE=marlin
-
 INITIAL_COPYRIGHT_YEAR=2017
 
 # Load extractutils and do some sanity checks
-MY_DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
+MY_DIR=$PWD
+GAHS_ROOT=$MY_DIR/../../..
+HELPER=$GAHS_ROOT/vendor/gahs/tools/extract_utils.sh
+DEVICE=$1
 
-GAHS_ROOT="$MY_DIR"/../../../..
-
-HELPER="$GAHS_ROOT"/vendor/gahs/tools/extract_utils.sh
-if [ ! -f "$HELPER" ]; then
+if [ ! -f $HELPER ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
 fi
-. "$HELPER"
+. $HELPER
+
+if [ $# != 1 ]; then
+    echo "$0: invalid arguments"
+    echo ""
+    echo "usage: $0 [DEVICE]"
+    exit 1
+fi
 
 # Initialize the helper
-setup_vendor "$DEVICE" "$VENDOR" "$GAHS_ROOT"
+setup_vendor $DEVICE $VENDOR $GAHS_ROOT
 
 # Copyright headers and guards
 write_headers
 
 # The standard blobs
-write_makefiles "$MY_DIR"/device-proprietary-files.txt
-write_makefiles "$MY_DIR"/device-proprietary-files-vendor.txt true
+write_makefiles $MY_DIR/device-proprietary-files.txt
+write_makefiles $MY_DIR/$DEVICE/device-proprietary-files-vendor.txt true
 
 # Finish
 write_footers
