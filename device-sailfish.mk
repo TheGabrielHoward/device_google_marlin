@@ -75,3 +75,11 @@ $(call add-product-sanitizer-module-config,mm-camera,never)
 $(call add-product-sanitizer-module-config,myftm,never)
 $(call add-product-sanitizer-module-config,libqcril,never)
 $(call add-product-sanitizer-module-config,hostapd,never)
+
+#Permissons
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=log \
+    ro.adb.secure=0 \
+    persist.sys.usb.config=mtp,adb \
+    persist.service.debuggable=1 \
+    persist.service.adb.enable=1

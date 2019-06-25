@@ -4,7 +4,7 @@
 #
 
 # Include Bootleggers BoardConfig
-include device/google/marlin/BoardConfigBootleg.mk
+include device/google/marlin/BoardConfigLiquid.mk
 
 TARGET_BOARD_PLATFORM := msm8996
 TARGET_BOOTLOADER_BOARD_NAME := sailfish
