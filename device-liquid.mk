@@ -44,3 +44,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += ro.opa.eligible_device=true
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
+
+LAWNCHAIR_OPTOUT := true
