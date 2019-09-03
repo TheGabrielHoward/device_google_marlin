@@ -11,6 +11,7 @@ genfscon proc /sys/kernel/sched_upmigrate             u:object_r:proc_kernel_sch
 genfscon proc /irq                                    u:object_r:proc_irq:s0
 genfscon proc /debug/fwdump                           u:object_r:proc_wifi_dbg:s0
 genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s0
+genfscon proc /sys/vm/swappiness                      u:object_r:proc_swappiness:s0
 
 # sysfs
 genfscon sysfs /devices/virtual/nanohub/nanohub       u:object_r:sysfs_nanoapp_cmd:s0
