@@ -779,6 +779,10 @@ PRODUCT_PACKAGES += \
     virtual_touchpad \
     vr_hwc
 
+# EGL lib suffix
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.egl=adreno
+
 include device/google/marlin/utils.mk
 
 $(call add-product-sanitizer-module-config,wpa_supplicant,never)
