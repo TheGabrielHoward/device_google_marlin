@@ -673,7 +673,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true \
-    media.mediadrmservice.enable=true
+    media.mediadrmservice.enable=true \
+    ro.hardware.egl=adreno
 
 # Sensors
 PRODUCT_PACKAGES += \
