@@ -46,9 +46,4 @@ setup_vendor $DEVICE $VENDOR $LINEAGE_ROOT
 extract $MY_DIR/device-proprietary-files.txt $SRC
 extract $MY_DIR/$DEVICE/device-proprietary-files-vendor.txt $SRC
 
-# Don't disable MyVerizonServices app
-MVS='<disabled-until-used-preinstalled-carrier-app package="com.verizon.mips.services" />'
-sed -i 's|'"$MVS"'|<!--'"$MVS"'-->|' \
-    $LINEAGE_ROOT/vendor/$VENDOR/$DEVICE/proprietary/etc/sysconfig/nexus.xml
-
 $MY_DIR/setup-makefiles.sh $DEVICE
