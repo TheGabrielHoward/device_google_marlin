@@ -126,8 +126,7 @@ TARGET_KERNEL_CONFIG := marlin_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image.lz4-dtb
 TARGET_KERNEL_SOURCE := kernel/google/marlin
 TARGET_KERNEL_CLANG_COMPILE := true
-# Always use highest Clang version
-TARGET_KERNEL_CLANG_VERSION := $(shell grep -v based prebuilts/clang/host/$(HOST_OS)-x86/*/AndroidVersion.txt | sort | tail -n 1 | cut -d : -f 2)
+TARGET_KERNEL_CLANG_VERSION := r365631
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
