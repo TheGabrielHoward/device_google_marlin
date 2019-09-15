@@ -1,4 +1,7 @@
 TARGET_BOARD_PLATFORM := msm8996
+QCOM_BOARD_PLATFORMS += msm8996
+MSM_VIDC_TARGET_LIST := msm8996
+MASTER_SIDE_CP_TARGET_LIST := msm8996
 
 TARGET_USES_INTERACTION_BOOST := true
 
@@ -33,25 +36,24 @@ TARGET_USES_HWC2 := true
 VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 
+# Audio
 BOARD_USES_GENERIC_AUDIO := true
-
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
-
 TARGET_USES_QCOM_MM_AUDIO := true
 
 -include $(QCPATH)/common/msm8996/BoardConfigVendor.mk
 
-# Some framework code requires this to enable BT
+# Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_USES_WIPOWER := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/marlin/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_USES_SDM845_BLUETOOTH_HAL := true
 BOARD_HAS_QCA_BT_ROME := true
 WCNSS_FILTER_USES_SIBS := true
 
+# WLAN
 BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
 WPA_SUPPLICANT_VERSION := VER_0_8_X
@@ -66,6 +68,8 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 USE_OPENGL_RENDERER := true
 BOARD_USE_LEGACY_UI := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+
+# RenderScript
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -136,20 +140,13 @@ TARGET_NO_RPC := true
 
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
 
-#Let charger mode enter suspend
+# Let charger mode enter suspend
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-#Enable Peripheral Manager
+# Enable Peripheral Manager
 TARGET_PER_MGR_ENABLED := true
 
-#Enable HW based full disk encryption
-# TODO: disable due to compile error due to mismatch with system/vold
-# TARGET_HW_DISK_ENCRYPTION := true
-
-#Enable SW based full disk encryption
-TARGET_SWV8_DISK_ENCRYPTION := false
-
-#Enable PD locater/notifier
+# Enable PD locater/notifier
 TARGET_PD_SERVICE_ENABLED := true
 
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -158,7 +155,7 @@ TARGET_BOOTIMG_SIGNED := true
 # HTC_SENSOR_HUB
 LIBHTC_SENSORHUB_PROJECT := g_project
 
-#Enable/Disable Camera daemon
+# Enable/Disable Camera daemon
 CAMERA_DAEMON_NOT_PRESENT := true
 
 #TARGET_LDPRELOAD := libNimsWrap.so
@@ -171,7 +168,7 @@ ADD_RADIO_FILES := true
 
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub libbootloader_message libfstab
 
-#Add support for firmare upgrade on 8996
+# Add support for firmare upgrade on 8996
 HAVE_SYNAPTICS_DSX_FW_UPGRADE := true
 
 # Enable MDTP (Mobile Device Theft Protection)
@@ -180,10 +177,11 @@ TARGET_USE_MDTP := true
 TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 
 -include vendor/google_devices/marlin/BoardConfigVendor.mk
+
 # Build a separate vendor.img
 TARGET_COPY_OUT_VENDOR := vendor
 
-#NFC
+# NFC
 NXP_CHIP_TYPE := 3
 
 # Testing related defines

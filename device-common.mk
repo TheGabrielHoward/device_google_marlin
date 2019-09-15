@@ -60,7 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-$(call inherit-product, device/google/marlin/common/common64.mk)
+$(call inherit-product, device/google/marlin/utils.mk)
 
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
@@ -90,8 +90,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=1024
 
 # For android_filesystem_config.h
-PRODUCT_PACKAGES += fs_config_files \
-                    fs_config_dirs
+PRODUCT_PACKAGES += \
+    fs_config_files \
+    fs_config_dirs
 
 # Audio configuration
 USE_XML_AUDIO_POLICY_CONF := 1
@@ -133,19 +134,31 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
-PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-service \
-    android.hardware.bluetooth.audio@2.0-impl \
-    android.hardware.contexthub@1.0-service \
-    android.hardware.gnss@1.0-service \
-    android.hardware.drm@1.0-service \
-    android.hardware.light@2.0-service \
-    android.hardware.memtrack@1.0-service \
-    android.hardware.power@1.1-service.marlin \
-    android.hardware.sensors@1.0-service \
-    android.hardware.vr@1.0-service \
 
-PRODUCT_PROPERTY_OVERRIDES += ro.hardware.power=marlin
+# Power HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.1-service.marlin \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.power=marlin
+
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-service \
+    android.hardware.memtrack@1.0-impl \
+    memtrack.msm8996
+
+# Camera HAL
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-service \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@3.2-impl \
+    camera.msm8996 \
+    libmmcamera_interface \
+    libmmjpeg_interface \
+    libmmlib2d_interface \
+    libmm-qcamera \
+    libqomx_core
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -153,7 +166,9 @@ PRODUCT_PACKAGES += \
 
 # Light HAL
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl:64
+    android.hardware.light@2.0-service \
+    android.hardware.light@2.0-impl:64 \
+    lights.msm8996
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
@@ -166,25 +181,76 @@ PRODUCT_PACKAGES += \
 
 # DRM HAL
 PRODUCT_PACKAGES += \
-    move_widevine_data.sh
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.0-impl:32 \
+    android.hardware.drm@1.2-service.clearkey
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true \
+    media.mediadrmservice.enable=true \
 
 # Audio effects
 PRODUCT_PACKAGES += \
+    libaudio-resampler \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors \
     libqcompostprocbundle
 
 PRODUCT_PACKAGES += \
-    sound_trigger.primary.msm8996
+    audio.primary.msm8996 \
+    audio.a2dp.default \
+    audio.bluetooth.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    audio.hearing_aid.default \
+    sound_trigger.primary.msm8996 \
 
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-service \
     android.hardware.audio@5.0-impl:32 \
     android.hardware.audio.effect@5.0-impl:32 \
     android.hardware.soundtrigger@2.2-impl:32
 
+# Audio test apps (only built in userdebug or eng builds)
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl:32
+    tinyplay \
+    tinycap \
+    tinymix \
+    tinypcminfo \
+    cplay
+endif
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
+    frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
+    frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
+    frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
+    frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml
 
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
@@ -236,6 +302,12 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += \
+    hostapd_cli \
+    wpa_cli
+endif
+
 #ANT+ stack
 PRODUCT_PACKAGES += \
     AntHalService \
@@ -274,10 +346,13 @@ NANOHUB_SENSORHAL_DYNAMIC_SENSOR_EXT_ENABLED := true
 
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl:64 \
-    android.hardware.contexthub@1.0-impl.nanohub:64 \
+    android.hardware.sensors@1.0-service \
+    android.hardware.contexthub@1.0-service \
+    android.hardware.contexthub@1.0-impl.nanohub:64
 
 PRODUCT_PACKAGES += \
-    nanoapp_cmd
+    nanoapp_cmd \
+    libsensorndkbridge
 
 # sensor utilities (only for userdebug and eng builds)
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -335,6 +410,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.radio.custom_ecc=1 \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.RATE_ADAPT_ENABLE=1 \
@@ -344,8 +421,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.VT_ENABLE=1 \
     persist.radio.VT_HYBRID_ENABLE=1 \
     persist.radio.data_con_rprt=true \
+    persist.radio.sib16_support=1 \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.mode=concurrent
@@ -451,7 +532,8 @@ AB_OTA_PARTITIONS += \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl-qti:64 \
     android.hardware.bluetooth@1.0-service-qti \
-    android.hardware.bluetooth@1.0-service-qti.rc
+    android.hardware.bluetooth@1.0-service-qti.rc \
+    android.hardware.bluetooth.audio@2.0-impl \
 
 # Bluetooth SoC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -466,18 +548,30 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.bluetooth.emb_wp_mode=true \
     ro.vendor.bluetooth.wipower=true
 
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
 # NFC packages
 PRODUCT_PACKAGES += \
     NfcNci \
     Tag \
     android.hardware.nfc@1.1-service \
 
-#Secure Element Service
+# GPS
+PRODUCT_PACKAGES += \
+    gps.default \
+    libgps.utils \
+    libloc_eng \
+    libloc_api_v02 \
+    libloc_ds_api
+
+# Secure Element Service
 PRODUCT_PACKAGES += \
     SecureElement \
 
-#GNSS HAL
+# GNSS HAL
 PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-service \
     android.hardware.gnss@1.0-impl:64
 
 # Vibrator
@@ -496,18 +590,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # VR
 PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-service \
     android.hardware.vr@1.0-impl:64
 
 # Gralloc
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.mapper@2.0-impl-2.1
+    android.hardware.graphics.mapper@2.0-impl-2.1 \
+    gralloc.default \
+    gralloc.msm8996
+
+PRODUCT_PACKAGES += \
+    libqdutils \
+    libqdMetaData
 
 # HW Composer
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-impl:64 \
-    android.hardware.graphics.composer@2.1-service
+    android.hardware.graphics.composer@2.1-service \
+    hwcomposer.msm8996
 
 # Boot control
 PRODUCT_PACKAGES += \
@@ -521,6 +623,18 @@ PRODUCT_PACKAGES += \
      libvts_profiling \
      libvts_multidevice_proto
 endif
+
+# Vidc
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libmm-omxcore \
+    libOmxCore \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw
+
+PRODUCT_PACKAGES += \
+    libstagefright_soft_flacdec
 
 # NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -645,26 +759,15 @@ PRODUCT_PACKAGES_DEBUG += a_sns_test
 PRODUCT_PACKAGES += \
     misc_writer
 
-# Camera
-PRODUCT_PACKAGES += \
-    libmm-qcamera
-
-# DRM
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.2-service.clearkey
-
+# EGL library suffix
 PRODUCT_PROPERTY_OVERRIDES += \
-    drm.service.enabled=true \
-    media.mediadrmservice.enable=true \
     ro.hardware.egl=adreno
 
-# Sensors
+# Tools
 PRODUCT_PACKAGES += \
-    libsensorndkbridge
-
-# Tool
-PRODUCT_PACKAGES += \
-    libtinyxml
+    libtinyxml \
+    gzip \
+    libxml2
 
 # VR Services
 PRODUCT_PACKAGES += \
@@ -672,3 +775,36 @@ PRODUCT_PACKAGES += \
     performanced \
     virtual_touchpad \
     vr_hwc
+
+# Preopt SystemUI with speed profile
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
+# Charger
+PRODUCT_PACKAGES += \
+    charger \
+    charger_res_images
+
+# SIM Toolkit
+PRODUCT_PACKAGES += \
+    Stk
+
+PRODUCT_LOADED_BY_PRIVILEGED_MODULES += \
+    qti-vzw-ims-internal \
+    qcrilhook \
+    ims \
+    Stk \
+    embmslibrary \
+    datastatusnotification \
+    VZWAPNLib \
+    UserDictionaryProvider
+
+# IMS
+PRODUCT_PACKAGES += \
+    imssettings \
+    ims-ext-common
+
+# Data services
+PRODUCT_PACKAGES += \
+    librmnetctl \
+    rmnetcli
