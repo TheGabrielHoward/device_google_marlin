@@ -37,7 +37,6 @@ lib/lib-imsvtutils.so
 lib/librcc.so
 
 # Permissions
-etc/permissions/privapp-permissions-google.xml
 product/etc/permissions/privapp-permissions-google-p.xml
 product/etc/permissions/privapp-permissions-google-ps.xml
 
