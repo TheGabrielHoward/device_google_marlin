@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL marlin and sailfish devices
-#
-# Everything in this directory will become public
-
 # Installs gsi keys into ramdisk, to boot a GSI with verified boot.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
@@ -65,11 +61,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/google/marlin/utils.mk)
 
-#Android EGL implementation
-PRODUCT_PACKAGES += libGLES_android
-PRODUCT_PACKAGES += SSRestartDetector
-
-# graphics
+# Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
@@ -178,7 +170,7 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl:64 \
     android.hardware.keymaster@3.0-service
 
-# Usb HAL
+# USB HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.marlin
 
@@ -215,15 +207,13 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@5.0-impl:32 \
     android.hardware.soundtrigger@2.2-impl:32
 
-# Audio test apps (only built in userdebug or eng builds)
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
+# Audio test apps
+PRODUCT_PACKAGES_DEBUG += \
     tinyplay \
     tinycap \
     tinymix \
     tinypcminfo \
     cplay
-endif
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -305,13 +295,13 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
+# Networking CLI tools
+PRODUCT_PACKAGES_DEBUG += \
     hostapd_cli \
-    wpa_cli
-endif
+    wpa_cli \
+    rmnetcli
 
-#ANT+ stack
+# ANT+ stack
 PRODUCT_PACKAGES += \
     AntHalService \
     libantradio \
@@ -347,27 +337,24 @@ NANOHUB_SENSORHAL_SENSORLIST := $(LOCAL_PATH)/sensorhal/sensorlist.cpp
 NANOHUB_SENSORHAL_DIRECT_REPORT_ENABLED := true
 NANOHUB_SENSORHAL_DYNAMIC_SENSOR_EXT_ENABLED := true
 
+# Sensor HAL
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl:64 \
     android.hardware.sensors@1.0-service \
     android.hardware.contexthub@1.0-service \
-    android.hardware.contexthub@1.0-impl.nanohub:64
-
-PRODUCT_PACKAGES += \
-    nanoapp_cmd \
+    android.hardware.contexthub@1.0-impl.nanohub:64 \
     libsensorndkbridge
 
-# sensor utilities (only for userdebug and eng builds)
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
+# Sensor utilities
+PRODUCT_PACKAGES_DEBUG += \
     nanotool \
+    nanoapp_cmd \
     sensortest
-endif
 
 PRODUCT_COPY_FILES += \
     device/google/marlin/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
-#FEATURE_OPENGLES_EXTENSION_PACK support string config file
+# FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
@@ -558,7 +545,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.1-service \
+    android.hardware.nfc@1.1-service
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -619,13 +606,10 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl:64 \
     android.hardware.boot@1.0-service
 
-# Library used for VTS tests  (only for userdebug and eng builds)
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-# For VTS profiling.
-PRODUCT_PACKAGES += \
+# Library used for VTS tests
+PRODUCT_PACKAGES_DEBUG += \
      libvts_profiling \
      libvts_multidevice_proto
-endif
 
 # Vidc
 PRODUCT_PACKAGES += \
@@ -756,7 +740,8 @@ PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
 
 # a_sns_test for sensor testing
-PRODUCT_PACKAGES_DEBUG += a_sns_test
+PRODUCT_PACKAGES_DEBUG += \
+    a_sns_test
 
 # Write flags to the vendor space in /misc partition.
 PRODUCT_PACKAGES += \
@@ -809,5 +794,4 @@ PRODUCT_PACKAGES += \
 
 # Data services
 PRODUCT_PACKAGES += \
-    librmnetctl \
-    rmnetcli
+    librmnetctl

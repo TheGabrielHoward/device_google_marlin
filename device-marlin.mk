@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL marlin devices
-#
-# Everything in this directory will become public
-
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
@@ -27,7 +23,7 @@ PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/marlin/marlin/overlay
 
-# display
+# Display
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560
 

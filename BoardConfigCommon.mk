@@ -47,6 +47,7 @@ TARGET_USES_QCOM_MM_AUDIO := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
+BOARD_USES_WIPOWER := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/marlin/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_USES_SDM845_BLUETOOTH_HAL := true
@@ -109,8 +110,6 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/marlin/sepolicy/private
 
 TARGET_FS_CONFIG_GEN := device/google/marlin/config.fs
 
-BOARD_EGL_CFG := device/google/marlin/egl.cfg
-
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 4096
 ifneq ($(filter sailfish_kasan marlin_kasan, $(TARGET_PRODUCT)),)
@@ -158,12 +157,10 @@ LIBHTC_SENSORHUB_PROJECT := g_project
 # Enable/Disable Camera daemon
 CAMERA_DAEMON_NOT_PRESENT := true
 
-#TARGET_LDPRELOAD := libNimsWrap.so
-
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
 
-#Add NON-HLOS files for ota upgrade
+# Add NON-HLOS files for ota upgrade
 ADD_RADIO_FILES := true
 
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub libbootloader_message libfstab
