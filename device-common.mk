@@ -137,14 +137,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# Power HAL
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service.marlin
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.power=marlin \
-    ro.vendor.extension_library=libqti-perfd-client.so
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     memtrack.msm8996 \
@@ -359,7 +351,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gyro.android=4 \
     persist.camera.tof.direct=1 \
     persist.camera.tnr.preview=1 \
-    persist.camera.tnr.video=1
+    persist.camera.tnr.video=1 \
+    persist.camera.perflock.enable=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \

@@ -57,7 +57,6 @@ vendor/bin/myftm
 vendor/bin/nanohub_slpi
 vendor/bin/netmgrd
 vendor/bin/nl_listener
-vendor/bin/perfd
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/bin/port-bridge
@@ -486,7 +485,6 @@ vendor/lib/libqmiservices_ext.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libqomx_jpegenc_pipe.so
-vendor/lib/libqti-perfd-client.so
 vendor/lib/libquipc_os_api.so
 vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/librmp.so
@@ -640,7 +638,6 @@ vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libqmiservices_ext.so
 vendor/lib64/libqmiservices_htc.so
-vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libquipc_os_api.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
