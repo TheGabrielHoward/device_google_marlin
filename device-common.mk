@@ -130,6 +130,14 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
+# Power HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.3-service.pixel-libperfmgr
+
+# Power hint
+PRODUCT_COPY_FILES += \
+    device/google/marlin/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-service \
