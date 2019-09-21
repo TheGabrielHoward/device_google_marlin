@@ -6,7 +6,6 @@ type firmware_file, fs_type, contextmount_type;
 # /data
 type smlog_dump_file, file_type, data_file_type, core_data_file_type;
 type location_data_file, file_type, data_file_type, core_data_file_type;
-type perfd_data_file, file_type, data_file_type, core_data_file_type;
 type time_data_file, file_type, data_file_type, core_data_file_type;
 type display_data_file, file_type, data_file_type, core_data_file_type;
 type netmgr_data_file, file_type, data_file_type, core_data_file_type;

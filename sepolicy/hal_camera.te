@@ -1,9 +1,3 @@
-# communicate with perfd
-typeattribute hal_camera_default data_between_core_and_vendor_violators;
-allow hal_camera perfd_data_file:dir search;
-allow hal_camera perfd:unix_stream_socket connectto;
-allow hal_camera perfd_data_file:sock_file write;
-
 allow hal_camera self:capability sys_nice;
 
 allow hal_camera gpu_device:chr_file rw_file_perms;

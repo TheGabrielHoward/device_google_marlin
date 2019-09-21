@@ -130,13 +130,6 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# Power HAL
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service.marlin \
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.power=marlin
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-service \
@@ -396,7 +389,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gyro.android=4 \
     persist.camera.tof.direct=1 \
     persist.camera.tnr.preview=1 \
-    persist.camera.tnr.video=1
+    persist.camera.tnr.video=1 \
+    persist.camera.perflock.enable=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \
@@ -414,9 +408,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sib16_support=1 \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.mode=concurrent

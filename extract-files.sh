@@ -46,4 +46,8 @@ setup_vendor $DEVICE $VENDOR $LINEAGE_ROOT
 extract $MY_DIR/device-proprietary-files.txt $SRC
 extract $MY_DIR/$DEVICE/device-proprietary-files-vendor.txt $SRC
 
+# Patch lib to remove dependency on perfd
+patchelf --remove-needed libqti-perfd-client.so \
+    $LINEAGE_ROOT/vendor/$VENDOR/$DEVICE/proprietary/vendor/lib/libmmcamera_imglib.so
+
 $MY_DIR/setup-makefiles.sh $DEVICE
