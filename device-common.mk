@@ -441,7 +441,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ssr.restart_level=venus,AR6320,slpi,modem,adsp
 
 PRODUCT_COPY_FILES += \
-    device/google/marlin/thermal-engine-marlin.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
+    device/google/marlin/thermal-engine-marlin-novr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-novr.conf \
     device/google/marlin/thermal-engine-marlin-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-vr.conf
 
 $(call inherit-product-if-exists, hardware/qcom/msm8996/msm8996.mk)
@@ -521,11 +521,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.thermal.config=thermal_info_config.json
-
-# VR
-PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-service \
-    android.hardware.vr@1.0-impl:64
 
 # Gralloc
 PRODUCT_PACKAGES += \
