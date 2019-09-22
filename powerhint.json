@@ -153,6 +153,8 @@
       "Path": "vendor.powerhal.state",
       "Values": [
         "SUSTAINED_PERFORMANCE",
+        "VR_MODE",
+        "VR_SUSTAINED_PERFORMANCE",
         ""
       ],
       "Type": "Property"
@@ -174,6 +176,16 @@
         ""
       ],
       "Type": "Property"
+    },
+    {
+      "Name": "ThermalMode",
+      "Path": "vendor.thermal.vr_mode",
+      "Values": [
+        "-vr",
+        "-novr"
+      ],
+      "Type": "Property",
+      "ResetOnInit": true
     }
   ],
   "Actions": [
@@ -344,6 +356,30 @@
       "Node": "GPUMinFreq",
       "Duration": 0,
       "Value": "510000000"
+    },
+    {
+      "PowerHint": "VR_MODE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "VR_MODE"
+    },
+    {
+      "PowerHint": "VR_MODE",
+      "Node": "ThermalMode",
+      "Duration": 0,
+      "Value": "-vr"
+    },
+    {
+      "PowerHint": "VR_SUSTAINED_PERFORMANCE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "VR_SUSTAINED_PERFORMANCE"
+    },
+    {
+      "PowerHint": "VR_SUSTAINED_PERFORMANCE",
+      "Node": "ThermalMode",
+      "Duration": 0,
+      "Value": "-vr"
     }
   ]
 }
