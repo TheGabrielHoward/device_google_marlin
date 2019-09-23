@@ -4,6 +4,7 @@ MSM_VIDC_TARGET_LIST := msm8996
 MASTER_SIDE_CP_TARGET_LIST := msm8996
 
 TARGET_USES_AOSP := true
+
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -26,7 +27,6 @@ BOOTLOADER_GCC_VERSION := arm-eabi-4.8
 # use msm8996 LK configuration
 BOOTLOADER_PLATFORM := msm8996
 
-TARGET_USES_OVERLAY := true
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
 TARGET_USES_GRALLOC1 := true
@@ -83,7 +83,7 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
+
 ifneq ($(TARGET_USES_AOSP),true)
 TARGET_USES_QCOM_BSP := true
 endif
@@ -100,9 +100,7 @@ BOARD_ROOT_EXTRA_FOLDERS := firmware firmware/radio persist
 BOARD_ROOT_EXTRA_SYMLINKS := /vendor/lib/dsp:/dsp
 
 BOARD_SEPOLICY_DIRS += device/google/marlin/sepolicy
-ifneq ($(filter lineage_sailfish sailfish sailfishf lineage_marlin marlin marlinf, $(TARGET_PRODUCT)),)
 BOARD_SEPOLICY_DIRS += device/google/marlin/sepolicy/verizon
-endif
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/marlin/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/marlin/sepolicy/private
 
@@ -153,9 +151,6 @@ LIBHTC_SENSORHUB_PROJECT := g_project
 
 # Enable/Disable Camera daemon
 CAMERA_DAEMON_NOT_PRESENT := true
-
-# Added to indicate that protobuf-c is supported in this build
-PROTOBUF_SUPPORTED := false
 
 # Add NON-HLOS files for ota upgrade
 ADD_RADIO_FILES := true
