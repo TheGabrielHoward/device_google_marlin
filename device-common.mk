@@ -775,3 +775,6 @@ PRODUCT_PACKAGES += \
 # Data services
 PRODUCT_PACKAGES += \
     librmnetctl
+
+# GApps
+$(call inherit-product-if-exists, vendor/gapps/gapps.mk)
