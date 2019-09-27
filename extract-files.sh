@@ -40,6 +40,15 @@ if [ $# -lt 1 ] || [ $# -gt 2 ]; then
     exit 1
 fi
 
+function blob_fixup() {
+    case $1 in
+        vendor/lib/libmmcamera_imglib.so)
+            patchelf --remove-needed libqti-perfd-client.so $2
+            ;;
+    esac
+}
+
+
 # Initialize the helper
 setup_vendor $DEVICE $VENDOR $LINEAGE_ROOT
 

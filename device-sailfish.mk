@@ -18,7 +18,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 
--include device/google/marlin/device-common.mk
+include device/google/marlin/device-common.mk
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/google/marlin/sailfish/overlay
@@ -51,7 +51,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/google/marlin/nfc/libnfc-nxp.sailfish.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
 
-# Led packages
+# LED packages
 PRODUCT_PACKAGES += \
     lights.sailfish
 

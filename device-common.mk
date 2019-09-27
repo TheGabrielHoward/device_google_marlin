@@ -19,8 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 PRODUCT_SHIPPING_API_LEVEL := 25
 
-# Setting vendor SPL
-VENDOR_SECURITY_PATCH := "2019-09-05"
+VENDOR_SECURITY_PATCH := 2019-09-05
 
 PRODUCT_SOONG_NAMESPACES += \
     device/google/marlin \
@@ -201,8 +200,6 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.hearing_aid.default \
     sound_trigger.primary.msm8996 \
-
-PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@5.0-impl:32 \
     android.hardware.audio.effect@5.0-impl:32 \
@@ -216,6 +213,7 @@ PRODUCT_PACKAGES_DEBUG += \
     tinypcminfo \
     cplay
 
+# Stagefright configuration
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
@@ -334,7 +332,7 @@ PRODUCT_PACKAGES += \
 # Common sensor packages
 TARGET_USES_NANOHUB_SENSORHAL := true
 NANOHUB_SENSORHAL_LID_STATE_ENABLED := true
-NANOHUB_SENSORHAL_SENSORLIST := $(LOCAL_PATH)/sensorhal/sensorlist.cpp
+NANOHUB_SENSORHAL_SENSORLIST := device/google/marlin/sensorhal/sensorlist.cpp
 NANOHUB_SENSORHAL_DIRECT_REPORT_ENABLED := true
 NANOHUB_SENSORHAL_DYNAMIC_SENSOR_EXT_ENABLED := true
 
@@ -384,7 +382,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192
 
 # Write Manufacturer & Model information in created media files.
-# IMPORTANT: ONLY SET THIS PROPERTY TO TRUE FOR PUBLIC DEVICES
 PRODUCT_PROPERTY_OVERRIDES += \
     media.recorder.show_manufacturer_and_model=true
 
@@ -459,19 +456,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
-INIT_COMMON_DIAG_RC := $(TARGET_COPY_OUT_VENDOR)/etc/init/init.diag.rc
-
 # Modem debugger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
-    device/google/marlin/init.common.diag.rc.userdebug:$(INIT_COMMON_DIAG_RC)
+    device/google/marlin/init.common.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.diag.rc
 
 # Subsystem ramdump
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ssr.enable_ramdumps=1
 else
 PRODUCT_COPY_FILES += \
-    device/google/marlin/init.common.diag.rc.user:$(INIT_COMMON_DIAG_RC)
+    device/google/marlin/init.common.diag.rc.user:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.diag.rc
 endif
 
 # Subsystem silent restart
@@ -483,7 +478,6 @@ PRODUCT_COPY_FILES += \
     device/google/marlin/thermal-engine-marlin-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-vr.conf
 
 $(call inherit-product-if-exists, hardware/qcom/msm8996/msm8996.mk)
-$(call inherit-product-if-exists, vendor/qcom/gpu/msm8996/msm8996-gpu-vendor.mk)
 
 # Needed for encryption
 PRODUCT_PACKAGES += \
@@ -501,6 +495,7 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     libgptutils \
     libz \
     libcutils
+
 PRODUCT_PACKAGES += \
     update_engine_sideload
 
@@ -546,7 +541,7 @@ PRODUCT_PACKAGES += \
 
 # Secure Element Service
 PRODUCT_PACKAGES += \
-    SecureElement \
+    SecureElement
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
@@ -555,7 +550,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-service.marlin \
+    android.hardware.vibrator@1.0-service.marlin
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
@@ -618,6 +613,7 @@ PRODUCT_COPY_FILES += \
 # Bootloader HAL used for A/B updates.
 PRODUCT_PACKAGES += \
     bootctrl.msm8996
+
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
 
@@ -661,7 +657,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-#Reduce cost of scrypt for FBE CE decryption
+# Reduce cost of scrypt for FBE CE decryption
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.scrypt_params=13:3:1
 

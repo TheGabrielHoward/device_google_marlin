@@ -20,12 +20,6 @@ TARGET_2ND_CPU_VARIANT := kryo
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
-TARGET_RECOVERY_FSTAB := device/google/marlin/fstab.common
-BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-BOOTLOADER_GCC_VERSION := arm-eabi-4.8
-# use msm8996 LK configuration
-BOOTLOADER_PLATFORM := msm8996
 
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
@@ -35,13 +29,9 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 
 # Audio
-BOARD_USES_GENERIC_AUDIO := true
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
-TARGET_USES_QCOM_MM_AUDIO := true
-
--include $(QCPATH)/common/msm8996/BoardConfigVendor.mk
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -64,29 +54,49 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP  := "ap"
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
-USE_OPENGL_RENDERER := true
-BOARD_USE_LEGACY_UI := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # RenderScript
-OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+# Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
+
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x02000000
+
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
+
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
+
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
+
 BOARD_VENDORIMAGE_PARTITION_SIZE := 314572800
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
+
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_USES_ION := true
+# Board uses A/B OTA.
+AB_OTA_UPDATER := true
 
-ifneq ($(TARGET_USES_AOSP),true)
-TARGET_USES_QCOM_BSP := true
-endif
+# A/B updater updatable partitions list. Keep in sync with the partition list
+# with "_a" and "_b" variants in the device. Note that the vendor can add more
+# more partitions to this list for the bootloader and radio.
+AB_OTA_PARTITIONS += \
+    boot \
+    system \
+    vendor
+
+# Partitions (listed in the file) to be wiped under recovery.
+TARGET_RECOVERY_WIPE := device/google/marlin/recovery.wipe.common
+TARGET_RECOVERY_FSTAB := device/google/marlin/fstab.common
+
+BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+TARGET_USES_ION := true
 
 BOARD_KERNEL_CMDLINE += console=ttyHSL0,115200,n8
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyHSL0
@@ -126,58 +136,24 @@ TARGET_KERNEL_SOURCE := kernel/google/marlin
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CLANG_VERSION := r365631b
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 TARGET_NO_RPC := true
 
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
-
 # Let charger mode enter suspend
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-# Enable Peripheral Manager
-TARGET_PER_MGR_ENABLED := true
-
-# Enable PD locater/notifier
-TARGET_PD_SERVICE_ENABLED := true
-
-BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_BOOTIMG_SIGNED := true
-
-# HTC_SENSOR_HUB
-LIBHTC_SENSORHUB_PROJECT := g_project
-
-# Enable/Disable Camera daemon
+# Camera HAL
 CAMERA_DAEMON_NOT_PRESENT := true
-
-# Add NON-HLOS files for ota upgrade
-ADD_RADIO_FILES := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub libbootloader_message libfstab
 
-# Add support for firmare upgrade on 8996
-HAVE_SYNAPTICS_DSX_FW_UPGRADE := true
-
-# Enable MDTP (Mobile Device Theft Protection)
-TARGET_USE_MDTP := true
-
-TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
-
--include vendor/google_devices/marlin/BoardConfigVendor.mk
-
-# Build a separate vendor.img
-TARGET_COPY_OUT_VENDOR := vendor
-
-# NFC
-NXP_CHIP_TYPE := 3
-
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/sailin-setup.sh
-
-# Use mke2fs to create ext4 images
-TARGET_USES_MKE2FS := true
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
@@ -190,16 +166,4 @@ EXCLUDE_SERIF_FONTS := true
 
 TARGET_FLATTEN_APEX := true
 
-# Board uses A/B OTA.
-AB_OTA_UPDATER := true
-
-# A/B updater updatable partitions list. Keep in sync with the partition list
-# with "_a" and "_b" variants in the device. Note that the vendor can add more
-# more partitions to this list for the bootloader and radio.
-AB_OTA_PARTITIONS += \
-    boot \
-    system \
-    vendor
-
-# Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := device/google/marlin/recovery.wipe.common
+-include vendor/google_devices/marlin/BoardConfigVendor.mk
