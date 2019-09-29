@@ -20,4 +20,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 BUILD_FINGERPRINT := google/sailfish/sailfish:10/QP1A.190711.020/5800535:user/release-keys
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.fingerprint=$(BUILD_FINGERPRINT)
+
 $(call inherit-product-if-exists, vendor/google/sailfish/sailfish-vendor.mk)
