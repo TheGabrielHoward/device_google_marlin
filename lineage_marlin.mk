@@ -12,7 +12,6 @@ $(call inherit-product, device/google/marlin/aosp_marlin.mk)
 PRODUCT_NAME := lineage_marlin
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Pixel XL
-TARGET_MANUFACTURER := HTC
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \

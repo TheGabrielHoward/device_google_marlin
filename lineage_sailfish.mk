@@ -12,7 +12,6 @@ $(call inherit-product, device/google/marlin/aosp_sailfish.mk)
 PRODUCT_NAME := lineage_sailfish
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Pixel
-TARGET_MANUFACTURER := Google
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
