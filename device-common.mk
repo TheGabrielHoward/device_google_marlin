@@ -19,7 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 PRODUCT_SHIPPING_API_LEVEL := 25
 
-VENDOR_SECURITY_PATCH := 2019-09-05
+VENDOR_SECURITY_PATCH := 2019-10-05
 
 PRODUCT_SOONG_NAMESPACES += \
     device/google/marlin \
