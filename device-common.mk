@@ -203,11 +203,17 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     audio.hearing_aid.default \
-    sound_trigger.primary.msm8996 \
+    sound_trigger.primary.msm8996
+
+PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@5.0-impl:32 \
     android.hardware.audio.effect@5.0-impl:32 \
     android.hardware.soundtrigger@2.2-impl:32
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.vc_call_vol_steps=7 \
+    fmas.hdph_sgain=0
 
 # Audio test apps
 PRODUCT_PACKAGES_DEBUG += \
@@ -773,3 +779,12 @@ PRODUCT_PACKAGES += \
 
 # GApps
 $(call inherit-product-if-exists, vendor/gapps/gapps.mk)
+
+$(call add-product-sanitizer-module-config,wpa_supplicant,never)
+$(call add-product-sanitizer-module-config,toybox_vendor,never)
+$(call add-product-sanitizer-module-config,thermal-engine,never)
+$(call add-product-sanitizer-module-config,netmgrd,never)
+$(call add-product-sanitizer-module-config,mm-camera,never)
+$(call add-product-sanitizer-module-config,myftm,never)
+$(call add-product-sanitizer-module-config,libqcril,never)
+$(call add-product-sanitizer-module-config,hostapd,never)
