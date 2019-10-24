@@ -661,3 +661,17 @@ PRODUCT_PACKAGES_DEBUG += a_sns_test
 # Write flags to the vendor space in /misc partition.
 PRODUCT_PACKAGES += \
     misc_writer
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.vc_call_vol_steps=7 \
+    fmas.hdph_sgain=0
+
+$(call add-product-sanitizer-module-config,wpa_supplicant,never)
+$(call add-product-sanitizer-module-config,toybox_vendor,never)
+$(call add-product-sanitizer-module-config,thermal-engine,never)
+$(call add-product-sanitizer-module-config,netmgrd,never)
+$(call add-product-sanitizer-module-config,mm-camera,never)
+$(call add-product-sanitizer-module-config,myftm,never)
+$(call add-product-sanitizer-module-config,libqcril,never)
+$(call add-product-sanitizer-module-config,hostapd,never)

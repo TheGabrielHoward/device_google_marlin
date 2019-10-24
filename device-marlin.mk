@@ -31,11 +31,6 @@ DEVICE_PACKAGE_OVERLAYS += device/google/marlin/marlin/overlay
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560
 
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=7 \
-    fmas.hdph_sgain=0
-
 # HWUI cache sizes
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=72 \
@@ -66,12 +61,3 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprint.marlin
-
-$(call add-product-sanitizer-module-config,wpa_supplicant,never)
-$(call add-product-sanitizer-module-config,toybox_vendor,never)
-$(call add-product-sanitizer-module-config,thermal-engine,never)
-$(call add-product-sanitizer-module-config,netmgrd,never)
-$(call add-product-sanitizer-module-config,mm-camera,never)
-$(call add-product-sanitizer-module-config,myftm,never)
-$(call add-product-sanitizer-module-config,libqcril,never)
-$(call add-product-sanitizer-module-config,hostapd,never)
