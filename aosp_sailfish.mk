@@ -14,12 +14,12 @@
 # limitations under the License.
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+
+$(call inherit-product, device/google/marlin/device-sailfish.mk)
+$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-sailfish.mk)
 
 PRODUCT_NAME := aosp_sailfish
 PRODUCT_DEVICE := sailfish
@@ -28,12 +28,8 @@ PRODUCT_MODEL := AOSP on msm8996
 PRODUCT_MANUFACTURER := Google
 PRODUCT_RESTRICT_VENDOR_FILES := true
 
-PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.sailfish
-
-$(call inherit-product, device/google/marlin/device-sailfish.mk)
-$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-sailfish.mk)
+PRODUCT_COPY_FILES += \
+    device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.sailfish
 
 PRODUCT_PACKAGES += \
-    Launcher3QuickStep \
     WallpaperPicker
-
