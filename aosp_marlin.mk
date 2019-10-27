@@ -28,8 +28,15 @@ PRODUCT_MODEL := AOSP on msm8996
 PRODUCT_MANUFACTURER := Google
 PRODUCT_RESTRICT_VENDOR_FILES := true
 
+# Inherit some common  Evolution X stuff.
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_BOOT_ANIMATION_RES_EVO := true
+TARGET_GAPPS_ARCH := arm64
+CUSTOM_BUILD_TYPE := OFFICIAL
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+
 $(call inherit-product, device/google/marlin/device-marlin.mk)
-$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-marlin.mk)
+$(call inherit-product-if-exists, vendor/google/marlin/marlin-vendor.mk)
 
 PRODUCT_PACKAGES += \
     Launcher3QuickStep \

@@ -1,3 +1,3 @@
 ifeq ($(LINEAGE_BUILD),)
-include $(call all-subdir-makefiles)
+#include $(call all-subdir-makefiles)
 endif

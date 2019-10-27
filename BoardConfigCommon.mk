@@ -59,6 +59,9 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 # RenderScript
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+# Overridings Commands
+BUILD_BROKEN_DUP_RULES := true
+
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
 
@@ -134,7 +137,6 @@ TARGET_KERNEL_CONFIG := marlin_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image.lz4-dtb
 TARGET_KERNEL_SOURCE := kernel/google/marlin
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CLANG_VERSION := latest
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_BOARD_KERNEL_HEADERS := device/google/marlin/kernel-headers
 
