@@ -21,13 +21,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-PRODUCT_NAME := aosp_marlin
-PRODUCT_DEVICE := marlin
-PRODUCT_BRAND := google
-PRODUCT_MODEL := Pixel XL
-PRODUCT_MANUFACTURER := Google
-PRODUCT_RESTRICT_VENDOR_FILES := true
-
 # Inherit some common  Evolution X stuff.
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_BOOT_ANIMATION_RES_EVO := true
@@ -38,10 +31,19 @@ $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 $(call inherit-product, device/google/marlin/device-marlin.mk)
 $(call inherit-product-if-exists, vendor/google/marlin/marlin-vendor.mk)
 
+# Device identifier
+PRODUCT_NAME := aosp_marlin
+PRODUCT_DEVICE := marlin
+PRODUCT_BRAND := google
+PRODUCT_MODEL := Pixel XL
+PRODUCT_MANUFACTURER := Google
+PRODUCT_RESTRICT_VENDOR_FILES := true
+
 PRODUCT_PACKAGES += \
     Launcher3QuickStep \
     WallpaperPicker
 
+# Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=marlin \
     PRIVATE_BUILD_DESC="marlin-user 10 QP1A.191005.007.A1 5908163 release-keys"
