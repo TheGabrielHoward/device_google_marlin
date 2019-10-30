@@ -17,10 +17,7 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
+# Device identifier
 PRODUCT_NAME := aosp_marlin
 PRODUCT_DEVICE := marlin
 PRODUCT_BRAND := Android
