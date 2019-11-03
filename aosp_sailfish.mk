@@ -45,4 +45,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=sailfish \
     PRIVATE_BUILD_DESC="sailfish-user 9 PQ3A.190801.002 5670241 release-keys"
 
-BUILD_FINGERPRINT="google/marlin/sailfish:9/PQ3A.190801.002/5670241:user/release-keys"
+BUILD_FINGERPRINT := google/marlin/sailfish:9/PQ3A.190801.002/5670241:user/release-keys
