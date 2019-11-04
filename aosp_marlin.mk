@@ -47,3 +47,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="marlin-user 9 PQ3A.190801.002 5670241 release-keys"
 
 BUILD_FINGERPRINT := google/marlin/marlin:9/PQ3A.190801.002/5670241:user/release-keys
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.fingerprint=$(BUILD_FINGERPRINT)
+
