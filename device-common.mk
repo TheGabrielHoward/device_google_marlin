@@ -778,6 +778,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.egl=adreno
 
+# Include Google apps by default
+ifneq ($(TARGET_BUILD_GAPPS),false)
+$(call inherit-product-if-exists, vendor/gapps/gapps.mk)
+endif
+
 include device/google/marlin/utils.mk
 
 $(call add-product-sanitizer-module-config,wpa_supplicant,never)
