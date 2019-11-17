@@ -52,3 +52,6 @@ BUILD_FINGERPRINT := google/marlin/marlin:10/QP1A.191005.007.A1/5908163:user/rel
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
+
+# Priv-App
+PRODUCT_PRODUCT_PROPERTIES += ro.control_privapp_permissions=log

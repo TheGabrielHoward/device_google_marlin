@@ -52,3 +52,6 @@ BUILD_FINGERPRINT := google/sailfish/sailfish:10/QP1A.191005.007.A1/5908163:user
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
+
+# Priv-app
+PRODUCT_PRODUCT_PROPERTIES += ro.control_privapp_permissions=log
