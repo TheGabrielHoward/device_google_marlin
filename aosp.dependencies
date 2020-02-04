@@ -1,0 +1,8 @@
+[
+  {
+    "remote": "thegabrielhoward",
+    "repository": "vendor_google",
+    "target_path": "vendor/google_devices",
+    "branch": "ten"
+     }
+]
