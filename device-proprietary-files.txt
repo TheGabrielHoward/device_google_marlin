@@ -137,6 +137,7 @@ etc/permissions/com.verizon.services.xml
 product/etc/permissions/features-verizon.xml
 product/etc/permissions/obdm_permissions.xml
 product/etc/permissions/vzw_mvs_permissions.xml
+product/etc/sysconfig/vzw_mvs_sysconfig.xml
 -product/priv-app/CarrierSetup/CarrierSetup.apk
 -product/priv-app/ConnMO/ConnMO.apk
 -product/priv-app/DCMO/DCMO.apk
