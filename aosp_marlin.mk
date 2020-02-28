@@ -29,7 +29,7 @@ CUSTOM_BUILD_TYPE := OFFICIAL
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 $(call inherit-product, device/google/marlin/device-marlin.mk)
-$(call inherit-product-if-exists, vendor/google_devices/marlin/marlin-vendor.mk)
+$(call inherit-product, vendor/google_devices/marlin/marlin-vendor.mk)
 
 # Device identifier
 PRODUCT_NAME := aosp_marlin
