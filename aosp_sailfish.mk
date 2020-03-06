@@ -25,7 +25,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_BOOT_ANIMATION_RES_EVO := true
 TARGET_GAPPS_ARCH := arm64
-CUSTOM_BUILD_TYPE := OFFICIAL
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 $(call inherit-product, device/google/marlin/device-sailfish.mk)
