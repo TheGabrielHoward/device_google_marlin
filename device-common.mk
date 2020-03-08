@@ -133,14 +133,6 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
-# Power HAL
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.3-service.pixel-libperfmgr
-
-# Power hint
-PRODUCT_COPY_FILES += \
-    device/google/marlin/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-service \
@@ -404,8 +396,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gyro.android=4 \
     persist.camera.tof.direct=1 \
     persist.camera.tnr.preview=1 \
-    persist.camera.tnr.video=1 \
-    persist.camera.perflock.enable=0
+    persist.camera.tnr.video=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \
@@ -564,7 +555,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # VR
 PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-service \
     android.hardware.vr@1.0-impl:64
 
 # Gralloc

@@ -90,6 +90,7 @@ on init
 
     # set default schedTune value for foreground/top-app (only affects EAS)
     write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 10
     write /dev/stune/top-app/schedtune.prefer_idle 1
     write /dev/stune/rt/schedtune.boost 30
     write /dev/stune/rt/schedtune.prefer_idle 1
@@ -126,11 +127,6 @@ on fs
 
 on post-fs
     symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
-
-    chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
-    chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
-    write /sys/devices/virtual/graphics/fb0/idle_time 100
-
     # Wait qseecomd started
     wait_for_prop sys.listeners.registered true
 
@@ -309,6 +305,14 @@ on zygote-start
     mkdir /data/misc/SelfHost/Running/ 2750 system shell
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
+    # Create PERFD deamon related dirs
+    setprop ro.min_freq_0 384000
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    rm /data/system/perfd/default_values
+    chmod 2770 /data/system/perfd
+
     # NFC local data and nfcee xml storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
@@ -327,6 +331,13 @@ on zygote-start
     write /data/misc/radio/db_check_done 0
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
+
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chmod 0660 /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+    chmod 0660 /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+    chown system system /sys/class/devfreq/soc:qcom,gpubw/min_freq
+    chmod 0660 /sys/class/devfreq/soc:qcom,gpubw/min_freq
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -385,6 +396,13 @@ on boot
     # bring back main cores CPU 0,2
     write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu2/online 1
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+
+    # EAS: Capping the max frequency of silver core to 1.6GHz
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1593600
+
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
 
     # if EAS is present, switch to sched governor (no effect if not EAS)
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "sched"
@@ -733,6 +751,16 @@ service vendor.diag_mdlog_stop /vendor/bin/diag_mdlog -k
     disabled
     oneshot
 
+service vendor.perfd /vendor/bin/perfd
+   class main
+   user root
+   group root system
+   writepid /dev/cpuset/system-background/tasks
+   disabled
+
+on property:sys.post_boot.parsed=1
+    start vendor.perfd
+
 on property:sys.boot_completed=1
     start vendor.power_sh
 
@@ -779,9 +807,6 @@ on property:sys.boot_completed=1
     chmod 644 /sys/kernel/debug/ufshcd0/stats/req_stats
     chmod 644 /sys/kernel/debug/ufshcd0/stats/query_stats
     chmod 644 /sys/kernel/debug/ufshcd0/stats/err_stats
-
-    # Enable PowerHAL hint processing
-    setprop vendor.powerhal.init 1
 
     # Used immediately below
     trigger sys-boot-completed-set
