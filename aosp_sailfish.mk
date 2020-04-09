@@ -38,5 +38,12 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, device/google/marlin/device-sailfish.mk)
 $(call inherit-product-if-exists, vendor/google_devices/sailfish/sailfish-vendor.mk)
 
-PRODUCT_PACKAGES += \
-    WallpaperPicker
+# Device Fingerprint
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=sailfish \
+    PRIVATE_BUILD_DESC="sailfish-user 10 QP1A.191005.007.A1 5908163 release-keys"
+
+BUILD_FINGERPRINT := google/sailfish/sailfish:10/QP1A.191005.007.A1/5908163:user/release-keys
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.fingerprint=$(BUILD_FINGERPRINT)
