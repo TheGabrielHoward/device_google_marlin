@@ -793,3 +793,7 @@ $(call add-product-sanitizer-module-config,mm-camera,never)
 $(call add-product-sanitizer-module-config,myftm,never)
 $(call add-product-sanitizer-module-config,libqcril,never)
 $(call add-product-sanitizer-module-config,hostapd,never)
+
+# Enforce privapp-permissions whitelist
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=disabled
