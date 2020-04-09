@@ -32,8 +32,10 @@ PRODUCT_MODEL := Pixel XL
 PRODUCT_MANUFACTURER := Google
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
-PRODUCT_COPY_FILES += \
-    device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.marlin
+PRODUCT_COPY_FILES += device/google/marlin/fstab.common:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.marlin
+
+$(call inherit-product, device/google/marlin/device-marlin.mk)
+$(call inherit-product-if-exists, vendor/google_devices/marlin/marlin-vendor.mk)
 
 PRODUCT_PACKAGES += \
     WallpaperPicker
