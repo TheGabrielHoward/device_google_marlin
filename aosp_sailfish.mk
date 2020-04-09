@@ -27,8 +27,8 @@ $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 # Device Identifier
 PRODUCT_NAME := aosp_sailfish
 PRODUCT_DEVICE := sailfish
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := AOSP on msm8996
+PRODUCT_BRAND := google
+PRODUCT_MODEL := Pixel
 PRODUCT_MANUFACTURER := Google
 PRODUCT_RESTRICT_VENDOR_FILES := true
 
