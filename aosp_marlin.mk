@@ -18,9 +18,13 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-$(call inherit-product, device/google/marlin/device-marlin.mk)
-$(call inherit-product-if-exists, vendor/google_devices/marlin/device-vendor-marlin.mk)
+# Inherit some common  Evolution X stuff.
+TARGET_BOOT_ANIMATION_RES := 1440
+TARGET_BOOT_ANIMATION_RES_EVO := true
+TARGET_GAPPS_ARCH := arm64
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
+# Device Identifier
 PRODUCT_NAME := aosp_marlin
 PRODUCT_DEVICE := marlin
 PRODUCT_BRAND := Android
