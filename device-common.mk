@@ -804,7 +804,6 @@ PRODUCT_PACKAGES += \
 
 # Evolution X Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    org.evolution.build_codename=The Instant Classic \
     org.evolution.build_donate_url=https://paypal.me/thegabrielhoward \
-    org.evolution.build_maintainer=Gabriel Howard \
+    org.evolution.build_maintainer=GabrielHoward \
     org.evolution.build_support_url=https://t.me/EvolutionXPixel
